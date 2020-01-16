@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { inc, dec, toggleAuth, getData } from "./actions";
 
 function App() {
+  const counter = useSelector(state => state.counter);
+  const auth = useSelector(state => state.auth);
+  const articles = useSelector(state => state.posts.posts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(articles);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Redux Using Hooks</h1>
+      <p>
+        Increase and decrease counter by <strong>5</strong>
+      </p>
+      <button onClick={() => dispatch(inc(5))}>+</button>
+      <button onClick={() => dispatch(dec(5))}>-</button>
+      <button onClick={() => dispatch(toggleAuth())}>
+        Authenticated: <strong>{auth.loggedIn ? "Yes" : "No"}</strong>
+      </button>
+      <h3>Counter: {counter}</h3>
+      <div>
+        <ul>
+          {articles.map(el => (
+            <li key={el.id}>{el.title}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
