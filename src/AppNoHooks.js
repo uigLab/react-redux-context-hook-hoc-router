@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {inc, dec, toggleAuth, postData} from './actions';
+import Button from './components/button';
 
 const mapStateToProps = state => ({
   counter: state.counter,
@@ -42,9 +43,9 @@ const App = (props) => {
       </p>
       <button onClick={() => dispatch(inc(100))}>+</button>
       <button onClick={() => dispatch(dec(100))}>-</button>
-      <button onClick={() => dispatch(toggleAuth())}>
+      <Button onClick={() => dispatch(toggleAuth())}>
         Authenticated: <strong>{auth.loggedIn ? "Yes" : "No"}</strong>
-      </button>
+      </Button>
       <h3>Counter: {counter}</h3>
       <br />
       <br />

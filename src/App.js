@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { inc, dec, toggleAuth, getData } from "./actions";
 
@@ -7,13 +7,15 @@ function App() {
   const auth = useSelector(state => state.auth);
   const articles = useSelector(state => state.posts.posts);
   const dispatch = useDispatch();
+  const incButton = useRef(null);
 
   useEffect(() => {
     dispatch(getData());
+    incButton.current.classList.add("NewClass")
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(articles);
+
 
   return (
     <div className="App">
@@ -21,7 +23,9 @@ function App() {
       <p>
         Increase and decrease counter by <strong>5</strong>
       </p>
-      <button onClick={() => dispatch(inc(5))}>+</button>
+      <button onClick={() => dispatch(inc(5))} ref={incButton}>
+        +
+      </button>
       <button onClick={() => dispatch(dec(5))}>-</button>
       <button onClick={() => dispatch(toggleAuth())}>
         Authenticated: <strong>{auth.loggedIn ? "Yes" : "No"}</strong>
