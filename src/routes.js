@@ -11,7 +11,6 @@ import {
 } from "react-router-dom";
 
 const Post = ({ match }) => {
-  console.log(match);
   return (
     <div>
       <h2>Post {match.params.id}</h2>
