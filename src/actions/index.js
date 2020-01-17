@@ -29,7 +29,7 @@ export const getData = () => {
 };
 
     
-
+// Post Data
 export const postData = (post) => {
 
   const options = {
